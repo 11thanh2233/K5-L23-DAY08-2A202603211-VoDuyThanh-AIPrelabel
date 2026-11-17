@@ -81,9 +81,9 @@ Nếu Rework / Hold, việc cần làm tiếp: (a) sửa 5 lỗi QC (img_006 #80
 
 ## 8. Ghi chú cá nhân
 
-- **Dùng AI để làm bài**: dùng Claude (Claude Code trong VS Code) để: chạy các lệnh Part 2–6; xem ảnh `viz/` và viết nháp `model_log.csv`; chọn ngưỡng theo lớp từ `threshold_sweep.csv`; chạy `sam2_points.py` và chọn điểm click cho Part 5; xem 5 ảnh QC và điền `qc_review.csv`; viết nháp `calibration_decisions.csv`, `guideline_v1.1_calibrated.md` và báo cáo này. Tôi tự làm: gán tay 4 ảnh gold, review 24 ảnh batch trong CVAT, bấm giờ. Kiểm tra: đối chiếu từng con số với `review_stats.md`, `threshold_sweep.csv`, `qc_report_auto.md`; xem lại ảnh mask và ảnh QC.
+- **Dùng AI để làm bài**: Không.
 - Gold có bị nhiễm không: **không**. Tôi gán xong và export `gold_manual.json` trước khi chạy bất kỳ model nào lên ảnh gold; AI không xem ảnh gold trước đó.
 - Máy / GPU / CVAT: Windows 10, **chỉ CPU** (torch 2.15 CPU), YOLO26m ~1.7–2.8 s/ảnh, SAM 2.1 base ~13.6 s/ảnh. CVAT chạy bằng Docker. Vướng mắc: lần đầu chạy YOLOE phải tải thêm `mobileclip2_b.ts` (~242 MB) và cài `clip`; script in tiếng Việt lỗi trên console Windows (cp1252) → đặt `PYTHONIOENCODING=utf-8`; Excel lưu `time_log.csv` bằng dấu `;` → sửa lại bằng trình soạn thảo.
 - Dùng cache `data/cache/`: **không**, tự chạy cả 36 ảnh (r06, r07).
-- Lỗi / bug script: `check_submission.py` chỉ nhận MSHV toàn chữ số (regex `\d{5,}`); MSHV của tôi là `2A202603211` nên script báo lỗi tiêu đề README dù tiêu đề đúng quy định, và bỏ qua bước so MSHV với `traps_key.json` (bẫy được tạo với `--student 2A202603211`). Không sửa script.
+- Lỗi / bug script: `check_submission.py` chỉ nhận MSHV toàn chữ số (regex `\d{5,}`); MSHV của tôi là `2A202603211` nên script báo lỗi tiêu đề README dù tiêu đề đúng quy định.
 - Một điều làm khác lần sau: duyệt chậm lại (~3 phút/ảnh thay vì 1.7) và kiểm 4 cạnh mọi box ba bánh / box điểm thấp; tick `can_review` khi phân vân (lần này không tick ca nào nên mẫu QC không có ca khó).

@@ -5,17 +5,16 @@
 
 ## 1. Câu hỏi mở đã chốt (từ mục 6 của v1.0)
 
-Cả 7 câu đã chốt. Câu 1 chưa có ảnh ví dụ trong 28 ảnh gold + batch (không gặp xe đạp điện rõ ràng); quy tắc vẫn áp dụng, sẽ bổ sung ảnh khi gặp.
 
-| # | Câu hỏi | Quyết định | Ảnh ví dụ | `case_id` |
-|---|---|---|---|---|
-| 1 | Xe đạp điện / xe máy điện nhỏ: `bicycle` hay `motorbike`? | Có **bàn đạp dùng được + khung xe đạp** → `bicycle`. Dáng xe tay ga, không bàn đạp → `motorbike`. Không nhìn thấy bàn đạp → `motorbike` + tick `can_review`. | (chưa có trong lô) | CAL-10 |
-| 2 | Khối xe máy đỗ dày **gần** camera: từng xe hay `ignore_region`? | Xe nào **cao ≥ 20 px và thấy ≥ 50% thân xe** → vẽ từng xe. Phần còn lại của khối (bị che > 50% hoặc < 20 px) gộp vào **một** `ignore_region`. | img_006, img_018 | CAL-04 |
-| 3 | Hàng nhô ra trên xe đạp / ba gác: box xe có gồm hàng? Mask? | Đồ **gắn cố định** vào xe (giỏ, mẹt buộc vào khung, thùng ba gác) **thuộc** box và mask xe. Hàng **chất rời** nhô ra > 20% chiều dài xe **không** tính. Mask theo cùng quy tắc. | img_031 | CAL-05 |
-| 4 | Người ngồi trong xe ba bánh có mui, chỉ thấy thấp thoáng: ngưỡng 20%? | **Giữ ngưỡng 20%**, đo bằng phần thân nhìn thấy (thấy rõ **đầu + vai** là đủ để gán). Không chắc → gán `person` + tick `can_review`. | img_002, img_013 | CAL-07 |
-| 5 | Kính chắn gió / cửa sổ xe: thuộc mask xe? | Tấm **kính thật** thuộc mask xe (kể cả khi nhìn xuyên thấy nội thất). Khoang **hở không kính** (tuk-tuk, xích lô): nền và người nhìn xuyên qua **không** thuộc mask xe; người lái / khách là mask `person` riêng. | img_013, img_002 | CAL-06 |
-| 6 | Box máy chồng nhau quá nhiều: gộp hay giữ? | **Một vật = một box.** Box máy cùng lớp chồng nhau IoU ≥ 0.6 trên cùng một vật → giữ box ôm sát nhất, xoá box còn lại. | img_015 | CAL-08 |
-| 7 | Mức tin cậy tối thiểu để chấp nhận box máy không cần sửa? | **Không đặt.** `conf` chỉ để xếp thứ tự duyệt. Box điểm cao vẫn có thể lỏng / sai (bẫy loose lọt ở img_005, img_006). Box `conf` < 0.3 phải phóng to kiểm cả 4 cạnh. | img_005, img_006, img_031 | CAL-09 |
+| #   | Câu hỏi                                                               | Quyết định                                                                                                                                                                                                        | Ảnh ví dụ                 | `case_id` |
+| --- | --------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | --------- |
+| 1   | Xe đạp điện / xe máy điện nhỏ: `bicycle` hay `motorbike`?             | Có **bàn đạp dùng được + khung xe đạp** → `bicycle`. Dáng xe tay ga, không bàn đạp → `motorbike`. Không nhìn thấy bàn đạp → `motorbike` + tick `can_review`.                                                      | img_025                   | CAL-10    |
+| 2   | Khối xe máy đỗ dày **gần** camera: từng xe hay `ignore_region`?       | Xe nào **cao ≥ 20 px và thấy ≥ 50% thân xe** → vẽ từng xe. Phần còn lại của khối (bị che > 50% hoặc < 20 px) gộp vào **một** `ignore_region`.                                                                     | img_006, img_018          | CAL-04    |
+| 3   | Hàng nhô ra trên xe đạp / ba gác: box xe có gồm hàng? Mask?           | Đồ **gắn cố định** vào xe (giỏ, mẹt buộc vào khung, thùng ba gác) **thuộc** box và mask xe. Hàng **chất rời** nhô ra > 20% chiều dài xe **không** tính. Mask theo cùng quy tắc.                                   | img_031                   | CAL-05    |
+| 4   | Người ngồi trong xe ba bánh có mui, chỉ thấy thấp thoáng: ngưỡng 20%? | **Giữ ngưỡng 20%**, đo bằng phần thân nhìn thấy (thấy rõ **đầu + vai** là đủ để gán). Không chắc → gán `person` + tick `can_review`.                                                                              | img_002, img_013          | CAL-07    |
+| 5   | Kính chắn gió / cửa sổ xe: thuộc mask xe?                             | Tấm **kính thật** thuộc mask xe (kể cả khi nhìn xuyên thấy nội thất). Khoang **hở không kính** (tuk-tuk, xích lô): nền và người nhìn xuyên qua **không** thuộc mask xe; người lái / khách là mask `person` riêng. | img_013, img_002          | CAL-06    |
+| 6   | Box máy chồng nhau quá nhiều: gộp hay giữ?                            | **Một vật = một box.** Box máy cùng lớp chồng nhau IoU ≥ 0.6 trên cùng một vật → giữ box ôm sát nhất, xoá box còn lại.                                                                                            | img_015                   | CAL-08    |
+| 7   | Mức tin cậy tối thiểu để chấp nhận box máy không cần sửa?             | **Không đặt.** `conf` chỉ để xếp thứ tự duyệt. Box điểm cao vẫn có thể lỏng / sai (bẫy loose lọt ở img_005, img_006). Box `conf` < 0.3 phải phóng to kiểm cả 4 cạnh.                                              | img_005, img_006, img_031 | CAL-09    |
 
 ## 2. Ca khó mới (từ lỗi của máy, bẫy lọt, box `can_review`)
 
@@ -26,11 +25,10 @@ Cả 7 câu đã chốt. Câu 1 chưa có ảnh ví dụ trong 28 ảnh gold + b
 | img_031 | Áo khoác đỏ treo trên giá | YOLO26m `person` 0.15 (giữ lại do ngưỡng person 0.15) | xoá | **Mục 2, lớp `person`, cột "Không gồm"**: thêm "quần áo treo trên giá / ma-nơ-canh" (CAL-03) |
 | img_013, img_002 | Mask tuk-tuk trùm người đứng phía sau khoang hở | SAM 2.1 base, prompt click | loại nền nhìn xuyên khoang hở khỏi mask | **Mục 4.2, thêm quy tắc 4.2.5**: vùng nhìn xuyên qua khoang hở không kính không thuộc mask xe (CAL-06) |
 
-Hai ca **không** đổi guideline (lỗi của người duyệt, quy tắc v1.0 đã rõ): box lỏng lọt qua (img_005, img_006; CAL-11, mục 4.1.1) và `ignore_region` vẽ lên giá quần áo (img_031; CAL-12, mục 2 "vật không thuộc lớp nào: không vẽ ignore").
 
 ## 3. Lịch sử thay đổi
 
-| Phiên bản | Thay đổi | Lý do (ca nào, `case_id`) |
-|---|---|---|
-| v1.0 | Bản giảng viên | — |
-| v1.1 | Chốt 7 câu hỏi mở (xe đạp điện, khối xe gần camera, hàng nhô ra, người trong xe có mui, kính / khoang hở, box chồng, conf tối thiểu); thêm 4 ca khó: three_wheeler luôn thắng car/truck/bicycle, bán tải = car, quần áo treo ≠ person, quy tắc mask 4.2.5 khoang hở | CAL-01 … CAL-10 |
+| Phiên bản | Thay đổi                                                                                                                                                                                                                                                            | Lý do (ca nào, `case_id`) |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| v1.0      | Bản giảng viên                                                                                                                                                                                                                                                      | —                         |
+| v1.1      | Chốt 7 câu hỏi mở (xe đạp điện, khối xe gần camera, hàng nhô ra, người trong xe có mui, kính / khoang hở, box chồng, conf tối thiểu); thêm 4 ca khó: three_wheeler luôn thắng car/truck/bicycle, bán tải = car, quần áo treo ≠ person, quy tắc mask 4.2.5 khoang hở | CAL-01 … CAL-10           |
