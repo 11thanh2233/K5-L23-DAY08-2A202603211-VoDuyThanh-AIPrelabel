@@ -1,0 +1,9 @@
+image,object_id,error_type,reviewer,note
+img_003.jpg,,khong,claude,"xe đẩy chở rau #5 three_wheeler box ôm cả mui + bánh; người ngồi trên xe có box riêng"
+img_006.jpg,80,sai_vi_tri_kich_thuoc,claude,"motorbike #80: cạnh trái lỏng ~45 px (box từ x=133, xe bắt đầu ~x=180), cạnh phải cắt mất đuôi xe (box tới x=360, xe tới ~x=390) - trùng ảnh có bẫy loose bị lọt"
+img_014.jpg,,khong,claude,"người gánh hàng #138 box gồm cả quang gánh nhưng vẫn trong giới hạn người + đồ cầm tay"
+img_031.jpg,477,thua,claude,"person 0.15 ở góc trên trái là áo khoác đỏ treo trên giá, không phải người (box máy điểm thấp còn sót lại do ngưỡng person=0.15)"
+img_031.jpg,479,sai_vi_tri_kich_thuoc,claude,"person #479 box dừng ở y=435, chân người bán hàng vẫn nhìn thấy qua bánh xe đạp tới ~y=680 (mục 4.1.2: box quanh phần nhìn thấy)"
+img_031.jpg,474,thua,claude,"ignore_region vẽ lên giá quần áo treo: không có người/xe; v1.0 mục 2: vật không thuộc lớp nào thì không vẽ ignore"
+img_031.jpg,475,thua,claude,"ignore_region thứ hai trên giá quần áo, cùng lỗi #474"
+img_035.jpg,,khong,claude,"xích lô #531 đúng three_wheeler; 2 ignore_region trước cửa hàng có người ngồi dày, chấp nhận được"
