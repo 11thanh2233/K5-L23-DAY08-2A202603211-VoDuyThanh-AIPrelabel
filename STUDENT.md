@@ -5,7 +5,7 @@
 - Lớp (L2 / L3 / khác): L2
 - Tài khoản GitHub: 11thanh2233
 - Repo bài nộp (URL): https://github.com/11thanh2233/K5-L23-DAY08-2A202603211-VoDuyThanh-AIPrelabel.git
-- Commit chốt bài (hash): <<>>
+- Commit chốt bài (hash): 4a9e4ad
 - Máy: Windows 10 CPU không GPU
 - CVAT (Docker): 2.74.1
 
