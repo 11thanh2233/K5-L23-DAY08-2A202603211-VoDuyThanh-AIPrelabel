@@ -81,7 +81,7 @@ Nếu Rework / Hold, việc cần làm tiếp: (a) sửa 5 lỗi QC (img_006 #80
 
 ## 8. Ghi chú cá nhân
 
-- **Dùng AI để làm bài**: Không.
+- **Dùng AI để làm bài**: Claude AI.
 - Gold có bị nhiễm không: **không**. Tôi gán xong và export `gold_manual.json` trước khi chạy bất kỳ model nào lên ảnh gold; AI không xem ảnh gold trước đó.
 - Máy / GPU / CVAT: Windows 10, **chỉ CPU** (torch 2.15 CPU), YOLO26m ~1.7–2.8 s/ảnh, SAM 2.1 base ~13.6 s/ảnh. CVAT chạy bằng Docker. Vướng mắc: lần đầu chạy YOLOE phải tải thêm `mobileclip2_b.ts` (~242 MB) và cài `clip`; script in tiếng Việt lỗi trên console Windows (cp1252) → đặt `PYTHONIOENCODING=utf-8`; Excel lưu `time_log.csv` bằng dấu `;` → sửa lại bằng trình soạn thảo.
 - Dùng cache `data/cache/`: **không**, tự chạy cả 36 ảnh (r06, r07).
